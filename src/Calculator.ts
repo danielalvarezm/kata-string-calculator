@@ -1,5 +1,5 @@
 export class Calculator {
-  private delimiters: RegExp = /[,]/
+  private delimiters: RegExp = /[,\n]/
 
   public add (input: string): number {
     if (input === '') return 0
