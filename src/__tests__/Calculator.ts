@@ -10,7 +10,11 @@ import { Calculator } from '../Calculator'
  */
 
 describe('The kata String Calculator should', () => {
-  const calculator = new Calculator()
+  let calculator: Calculator
+
+  beforeEach(() => {
+    calculator = new Calculator()
+  })
 
   it('give as result the same number', () => {
     expect(calculator.add('1')).toBe(1)
@@ -36,5 +40,6 @@ describe('The kata String Calculator should', () => {
   it('give the sum of two or more numbers delimited by an especific delimiter', () => {
     expect(calculator.add('//;\n1;2')).toBe(3)
     expect(calculator.add('//;\n10;5;2')).toBe(17)
+    expect(calculator.add('//f\n10f5f2')).toBe(17)
   })
 })
