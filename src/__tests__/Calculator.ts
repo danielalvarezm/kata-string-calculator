@@ -4,6 +4,7 @@ import { Calculator } from '../Calculator'
  * TODO: Test cases
  * * add('1') -> 1
  * * add('') -> 0
+ * * add('1,2') -> 3
  */
 
 describe('The kata String Calculator should', () => {
