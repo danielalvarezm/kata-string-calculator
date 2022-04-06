@@ -1,15 +1,18 @@
-export class Calculator {
+export class StringCalculator {
   private delimiters: RegExp = /[,\n]/
 
-  public add (input: string): number {
+  public processInput (input: string): number {
     if (input === '') return 0
 
     if (input.startsWith('//')) {
       this.updateDelimiters(input)
       input = input.split('\n')[1]
-      // const processInput = input.split('\n')[1]
-      // input = processInput.split(this.delimiters).join(',')
     }
+
+    return this.add(input)
+  }
+
+  private add (input: string): number {
     const numbers = input.split(this.delimiters)
 
     if (numbers.length <= 1) return parseInt(numbers[0]) // base case
