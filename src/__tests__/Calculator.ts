@@ -6,6 +6,7 @@ import { Calculator } from '../Calculator'
  * * add('') -> 0
  * * add('1,2') -> 3
  * * add('10,5\n2') -> 17
+ * * add('//;\n10;5;2') -> 17
  */
 
 describe('The kata String Calculator should', () => {
@@ -30,5 +31,10 @@ describe('The kata String Calculator should', () => {
   it('give the sum of two or more numbers delimited by comma or \\n', () => {
     expect(calculator.add('1\n2')).toBe(3)
     expect(calculator.add('10,5\n2')).toBe(17)
+  })
+
+  it('give the sum of two or more numbers delimited by an especific delimiter', () => {
+    expect(calculator.add('//;\n1;2')).toBe(3)
+    expect(calculator.add('//;\n10;5;2')).toBe(17)
   })
 })
