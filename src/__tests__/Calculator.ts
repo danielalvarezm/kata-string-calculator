@@ -20,9 +20,14 @@ describe('The kata String Calculator should', () => {
     expect(calculator.add('')).toBe(0)
   })
 
-  it('give the sum of two numbers delimited by comma', () => {
+  it('give the sum of two or more numbers delimited by comma', () => {
     expect(calculator.add('1,2')).toBe(3)
     expect(calculator.add('5,10')).toBe(15)
-    expect(calculator.add('10,5')).toBe(15)
+    expect(calculator.add('10,5,2')).toBe(17)
+  })
+
+  it('give the sum of two or more numbers delimited by comma or \\n', () => {
+    expect(calculator.add('1\n2')).toBe(3)
+    expect(calculator.add('10,5\n2')).toBe(17)
   })
 })
