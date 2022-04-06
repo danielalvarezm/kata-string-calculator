@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export class Calculator {
-  add (_numbers: string): number {
-    return -1
+  add (numbers: string): number {
+    return parseInt(numbers)
   }
 }
