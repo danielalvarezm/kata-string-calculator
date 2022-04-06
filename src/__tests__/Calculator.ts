@@ -3,8 +3,7 @@ import { Calculator } from '../Calculator'
 /**
  * TODO: Test cases
  * * add('1') -> 1
- * * add('5') -> 5
- * * add('10') -> 10
+ * * add('') -> 0
  */
 
 describe('The kata String Calculator should', () => {
@@ -14,5 +13,11 @@ describe('The kata String Calculator should', () => {
     expect(calculator.add('1')).toBe(1)
     expect(calculator.add('5')).toBe(5)
     expect(calculator.add('10')).toBe(10)
+  })
+
+  it('give zero if receive an empty string', () => {
+    const calculator = new Calculator()
+
+    expect(calculator.add('')).toBe(0)
   })
 })
