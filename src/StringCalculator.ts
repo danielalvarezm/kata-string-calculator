@@ -1,7 +1,7 @@
 export class StringCalculator {
   // expresion regular para ;; o ,
   private delimiters: RegExp = /[,\n]/
-  private delimitersLength: number = 0
+  private negativeDelimiterLength: number = 0
 
   public processInput (input: string): number {
     if (input === '') return 0
@@ -27,18 +27,20 @@ export class StringCalculator {
   }
 
   private checkNegatives (numbers: string): boolean {
-    if (numbers[0] === '-') return true
-    if (numbers.includes('-') && this.delimiters.source.indexOf('-') === -1) return true
+    if (!numbers.includes('-')) return false
 
-    // Check for negatives in delimiters
-    const regex = new RegExp(`-${'{' + (this.delimitersLength + 1) + '}'}`, 'g')
-    if (numbers.match(regex)) return true
+    const regexForNegatives = new RegExp(`-${'{' + (this.negativeDelimiterLength + 1) + '}'}`, 'g')
+    if (numbers[0] === '-') return true
+    else if (numbers.includes('-') && this.delimiters.source.indexOf('-') === -1) return true
+    else if (numbers.includes('-') && numbers.match(regexForNegatives)) return true // Check for negatives in delimiters
     return false
   }
 
   private updateDelimiters (input: string): void {
     const delimiters = input.split('\n')[0]
-    this.delimitersLength = (delimiters.length === 1) ? 1 : delimiters.length - 2
+    if (delimiters.includes('-')) {
+      this.negativeDelimiterLength = delimiters.lastIndexOf('-') - delimiters.indexOf('-') + 1
+    }
     const escapedDelimiters = this.escapeRegExp(delimiters)
     const regex = new RegExp(`[,${escapedDelimiters.replaceAll('[', '|').replaceAll(']', '')}]`, 'g')
     this.delimiters = regex
