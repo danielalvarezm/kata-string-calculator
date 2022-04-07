@@ -29,6 +29,7 @@ export class StringCalculator {
   private checkNegatives (numbers: string): boolean {
     if (numbers[0] === '-') return true
     if (numbers.includes('-') && this.delimiters.source.indexOf('-') === -1) return true
+
     // Check for negatives in delimiters
     const regex = new RegExp(`-${'{' + (this.delimitersLength + 1) + '}'}`, 'g')
     if (numbers.match(regex)) return true
@@ -39,11 +40,11 @@ export class StringCalculator {
     const delimiters = input.split('\n')[0]
     this.delimitersLength = (delimiters.length === 1) ? 1 : delimiters.length - 2
     const escapedDelimiters = this.escapeRegExp(delimiters)
-    const regex = new RegExp(`[,${escapedDelimiters.replace('[', '|').replace(']', '')}]`, 'g')
+    const regex = new RegExp(`[,${escapedDelimiters.replaceAll('[', '|').replaceAll(']', '')}]`, 'g')
     this.delimiters = regex
   }
 
-  private escapeRegExp (delimiters: string) {
+  private escapeRegExp (delimiters: string): string {
     return delimiters.replace(/[.*+\-?^${}()|\\]/g, '\\$&')
   }
 }
