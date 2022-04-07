@@ -42,4 +42,10 @@ describe('The kata String Calculator should', () => {
     expect(calculator.processInput('//;\n10;5;2')).toBe(17)
     expect(calculator.processInput('//f\n10f5f2')).toBe(17)
   })
+
+  it('not accept negatives numbers', () => {
+    expect(() => calculator.processInput('-1')).toThrowError('negatives not allowed')
+    expect(() => calculator.processInput('//;\n-1;2')).toThrowError('negatives not allowed')
+    expect(() => calculator.processInput('//-\n-1-2--3')).toThrowError('negatives not allowed')
+  })
 })
