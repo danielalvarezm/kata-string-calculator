@@ -55,4 +55,10 @@ describe('The kata String Calculator should', () => {
     expect(calculator.processInput('//;\n1001;2')).toBe(2)
     expect(calculator.processInput('1001,2,3')).toBe(5)
   })
+
+  it('accept delimiters specified of any length', () => {
+    expect(calculator.processInput('//[;;]\n1;;2')).toBe(3)
+    expect(calculator.processInput('//[***]\n5***1***3')).toBe(6)
+    expect(calculator.processInput('//[--]\n5--1--3')).toBe(6)
+  })
 })
