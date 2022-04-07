@@ -24,7 +24,7 @@ export class StringCalculator {
   }
 
   private clearInvalidCases (number: string): boolean {
-    if (parseInt(number) > 1000 || number === '') return true
+    if (parseInt(number) > 1000 || number === '' || number.match(/[a-zA-Z]/)) return true
     return false
   }
 
