@@ -73,4 +73,9 @@ describe('The kata String Calculator should', () => {
     expect(calculator.processInput('//[;;][ww]\n5ww1;;3')).toBe(9)
     expect(calculator.processInput('//[;;][--]\n5--1;;3')).toBe(9)
   })
+
+  it('ignore letters', () => {
+    expect(calculator.processInput('//;\n1;aa;2')).toBe(3)
+    expect(calculator.processInput('//[;;][*]\n1;;qwwq;;1*ss*1')).toBe(3)
+  })
 })
