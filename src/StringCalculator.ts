@@ -1,4 +1,4 @@
-export class Calculator {
+export class StringCalculator {
   public processRawInputReturnSum (rawInput: string): number {
     const input: number[] = this.processRawInput(rawInput)
     return this.sum(input)
