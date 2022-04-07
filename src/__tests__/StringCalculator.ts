@@ -49,4 +49,10 @@ describe('The kata String Calculator should', () => {
     expect(() => calculator.processInput('//-\n1-2--3')).toThrowError('negatives not allowed')
     expect(() => calculator.processInput('//-\n-1-2--3')).toThrowError('negatives not allowed')
   })
+
+  it('ignores numbers bigger than 1000', () => {
+    expect(calculator.processInput('1001')).toBe(0)
+    expect(calculator.processInput('//;\n1001;2')).toBe(2)
+    expect(calculator.processInput('1001,2,3,-1')).toBe(5)
+  })
 })
