@@ -9,6 +9,8 @@ export class StringCalculator {
       input = input.split('\n')[1]
     }
 
+    if (this.checkNegatives(input)) throw new Error('negatives not allowed')
+
     return this.add(input)
   }
 
@@ -20,6 +22,13 @@ export class StringCalculator {
       const [first, ...rest] = numbers
       return parseInt(first) + this.add(rest.join(','))
     }
+  }
+
+  private checkNegatives (numbers: string): boolean {
+    if (numbers[0] === '-') return true
+    if (numbers.includes('-') && this.delimiters.source.indexOf('-') === -1) return true
+    if (numbers.includes('--')) return true
+    return false
   }
 
   private updateDelimiters (input: string): void {

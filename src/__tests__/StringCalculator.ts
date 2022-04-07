@@ -46,6 +46,7 @@ describe('The kata String Calculator should', () => {
   it('not accept negatives numbers', () => {
     expect(() => calculator.processInput('-1')).toThrowError('negatives not allowed')
     expect(() => calculator.processInput('//;\n-1;2')).toThrowError('negatives not allowed')
+    expect(() => calculator.processInput('//-\n1-2--3')).toThrowError('negatives not allowed')
     expect(() => calculator.processInput('//-\n-1-2--3')).toThrowError('negatives not allowed')
   })
 })
