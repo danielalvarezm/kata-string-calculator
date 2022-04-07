@@ -17,11 +17,14 @@ export class StringCalculator {
   private add (input: string): number {
     const numbers = input.split(this.delimiters)
 
-    if (numbers.length <= 1) return parseInt(numbers[0]) // base case
-    else { // recursive case
-      const [first, ...rest] = numbers
-      return parseInt(first) + this.add(rest.join(','))
-    }
+    if (parseInt(numbers[0]) > 1000) numbers[0] = '0'
+
+    // base case
+    if (numbers.length <= 1) return parseInt(numbers[0])
+
+    // recursive case
+    const [first, ...rest] = numbers
+    return parseInt(first) + this.add(rest.join(','))
   }
 
   private checkNegatives (numbers: string): boolean {
