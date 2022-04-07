@@ -1,5 +1,4 @@
 export class StringCalculator {
-  // expresion regular para ;; o ,
   private delimiters: RegExp = /[,\n]/
   private negativeDelimiterLength: number = 0
 
@@ -10,20 +9,23 @@ export class StringCalculator {
       input = input.split('\n')[1]
     }
     if (this.checkNegatives(input)) throw new Error('negatives not allowed')
-
     return this.add(input)
   }
 
   private add (input: string): number {
     const numbers = input.split(this.delimiters)
-    if (parseInt(numbers[0]) > 1000 || numbers[0] === '') numbers[0] = '0'
+    if (this.clearInvalidCases(numbers[0])) numbers[0] = '0'
 
     // base case
     if (numbers.length <= 1) return parseInt(numbers[0])
-
     // recursive case
     const [first, ...rest] = numbers
     return parseInt(first) + this.add(rest.join(','))
+  }
+
+  private clearInvalidCases (number: string): boolean {
+    if (parseInt(number) > 1000 || number === '') return true
+    return false
   }
 
   private checkNegatives (numbers: string): boolean {
