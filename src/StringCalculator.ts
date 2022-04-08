@@ -1,9 +1,19 @@
 export class StringCalculator {
+  /**
+   * This method processes the input string and calls the sum method
+   * @param rawInput Input to be processed
+   * @returns The sum method result
+   */
   public processRawInputReturnSum (rawInput: string): number {
     const input: number[] = this.processRawInput(rawInput)
     return this.sum(input)
   }
 
+  /**
+   * This method calls the processDelimiter method and separates the input string into an array of numbers
+   * @param rawInput Input to be processed
+   * @returns array of numbers with the delimiters removed
+   */
   private processRawInput (rawInput: string): number[] {
     const [delimiter, input] = this.processDelimiter(rawInput)
     const inputSplitted = input.split(delimiter)
@@ -12,6 +22,11 @@ export class StringCalculator {
       .filter((element) => !isNaN(element))
   }
 
+  /**
+   * This method sums the array of numbers
+   * @param input Array of numbers to be summed
+   * @returns The sum of the array of numbers
+   */
   private sum (input: number[]): number {
     const defaultValue = 0
     if (input.some((element) => element < 0)) {
@@ -25,6 +40,11 @@ export class StringCalculator {
     }, defaultValue)
   }
 
+  /**
+   * With this method, we obtain all the delimiters in the input string
+   * @param rawInput Input to be processed
+   * @returns The delimiters and the input string without the beggining (//...\n)
+   */
   private processDelimiter (rawInput: string): [RegExp, string] {
     let delimiter: RegExp = /[,\n]/
 
@@ -46,6 +66,11 @@ export class StringCalculator {
     return [delimiter, rawInput]
   }
 
+  /**
+   * This method escapes special characters in a string
+   * @param delimiters Delimiters to be escaped
+   * @returns Delimiters with special characters escaped
+   */
   private escapeRegExp (delimiters: string) {
     return delimiters.replace(/[.*+\-?^${}()|\\]/g, '\\$&') // $& significa toda la cadena coincidente
   }
