@@ -3,26 +3,26 @@ export class StringCalculator {
 
   /**
    * This method processes the input string and calls the add method
-   * @param input Input to be processed
+   * @param rawExpresion Input to be processed
    * @returns The add method result
    */
-  public processInput (input: string): number {
-    if (input === '') return 0
-    if (input.startsWith('//')) {
-      this.updateDelimiters(input.replace('//', '').split('\n')[0])
-      input = input.split('\n')[1]
+  public processInput (rawExpresion: string): number {
+    if (rawExpresion === '') return 0
+    if (rawExpresion.startsWith('//')) {
+      this.updateDelimiters(rawExpresion.replace('//', '').split('\n')[0])
+      rawExpresion = rawExpresion.split('\n')[1]
     }
-    if (this.checkNegatives(input)) throw new Error('negatives not allowed')
-    return this.add(input)
+    if (this.checkNegatives(rawExpresion)) throw new Error('negatives not allowed')
+    return this.add(rawExpresion)
   }
 
   /**
    * Recursive method that sums the numbers in the input string
-   * @param input Input that contains the numbers to be added
+   * @param rawExpression Input that contains the numbers to be added
    * @returns The sum of the numbers in the input string
    */
-  private add (input: string): number {
-    const numbers = input.split(this.delimiters)
+  private add (rawExpression: string): number {
+    const numbers = rawExpression.split(this.delimiters)
     if (this.checkInvalidCases(numbers[0])) numbers[0] = '0'
 
     // base case
@@ -59,15 +59,15 @@ export class StringCalculator {
 
   /**
    * This method updates the delimiters attribute
-   * @param input Input that contains the delimiters
+   * @param rawExpression Input that contains the delimiters
    */
-  private updateDelimiters (input: string): void {
-    if (input.length === 1) {
-      this.delimiters = new RegExp(`[,]|[\\n]|[${this.escapeRegExp(input)}]`)
+  private updateDelimiters (rawExpression: string): void {
+    if (rawExpression.length === 1) {
+      this.delimiters = new RegExp(`[,]|[\\n]|[${this.escapeRegExp(rawExpression)}]`)
       return
     }
 
-    const delimiters = input.replaceAll('[', ' ').replaceAll(']', '')
+    const delimiters = rawExpression.replaceAll('[', ' ').replaceAll(']', '')
     const delimitersRegExp = delimiters.replace(/([^\s]{1})/g, '[$1]')
     const escapedDelimiters = '[,]|[\\n]' + this.escapeRegExp(delimitersRegExp).replaceAll(' ', '|')
     this.delimiters = new RegExp(escapedDelimiters)
